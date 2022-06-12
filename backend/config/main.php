@@ -7,11 +7,15 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-backend',
+    'id' => 'backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'aliases' => [
+        '@bower' => dirname(dirname(__DIR__)) . '/vendor'.'/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,6 +32,12 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
         ],
     ],
     'params' => $params,

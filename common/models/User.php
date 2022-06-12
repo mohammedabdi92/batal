@@ -20,6 +20,7 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $amount
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -73,8 +74,15 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        $token = Yii::$app->jwt->getParser()->parse((string) $token);
+        $token->getHeaders(); // Retrieves the token header
+//        $token->getClaims(); // Retrieves the token claims
+        $id = (string)$token->getClaim('uid');
+
+        return static::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
+
     }
+
 
     /**
      * Finds user by username
@@ -85,6 +93,17 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $email
+     * @return static|null
+     */
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
