@@ -14,4 +14,9 @@ class CustomFunc
         }
         return $str;
     }
+    public static function arrayList($models,$from="id",$to="name"){
+        if($models)
+            return \yii\helpers\ArrayHelper::map($models, $from, $to);
+
+    }
 }

@@ -12,15 +12,15 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
-        ];
-
-        return $behaviors;
-    }
+//    public function behaviors()
+//    {
+//        $behaviors = parent::behaviors();
+//        $behaviors['authenticator'] = [
+//            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
+//        ];
+//
+//        return $behaviors;
+//    }
     public function actionIndex()
     {
        return "asdsadsa";
@@ -35,7 +35,7 @@ class SiteController extends Controller
         $params = \Yii::$app->request->post();
         if(!empty($params['id']))
         {
-            return ['data'=> SupCategory::find()->where(['status'=>1,'main_cat_id'=>$params['id']])->all()];
+            return ['data'=> SupCategory::find()->where(['status'=>1,'main_cat_id'=>$params['id'],'sup_cat_id'=>null])->all()];
         }
         //400
         return ['رجع ال id يا محترم'];

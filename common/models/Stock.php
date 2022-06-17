@@ -12,10 +12,26 @@ use Yii;
  * @property float|null $user_id
  * @property string|null $reservation_date
  * @property string|null $serial_number
+ * @property string|null $code
  * @property int|null $status
  */
 class Stock extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_PAYED = 2;
+    const statusArray = [
+        self::STATUS_DELETED=>"غير فعال",
+        self::STATUS_ACTIVE=>"متاح",
+        self::STATUS_PAYED=>"مباع",
+    ];
+    const editeStatusArray = [
+        self::STATUS_DELETED=>"غير فعال",
+        self::STATUS_ACTIVE=>"متاح",
+    ];
+    public  function getStatusText(){
+        return self::statusArray[$this->status];
+    }
     /**
      * {@inheritdoc}
      */
@@ -32,6 +48,7 @@ class Stock extends \yii\db\ActiveRecord
         return [
             [['card_id', 'status'], 'integer'],
             [['user_id'], 'number'],
+            [['code'],'required'],
             [['reservation_date'], 'safe'],
             [['serial_number'], 'string', 'max' => 255],
         ];
@@ -43,12 +60,12 @@ class Stock extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'card_id' => Yii::t('app', 'Card ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'reservation_date' => Yii::t('app', 'Reservation Date'),
-            'serial_number' => Yii::t('app', 'Serial Number'),
-            'status' => Yii::t('app', 'Status'),
+            'id' => Yii::t('app', 'الرقم'),
+            'card_id' => Yii::t('app', 'اسم البطاقة'),
+            'user_id' => Yii::t('app', 'المشتري'),
+            'reservation_date' => Yii::t('app', 'وقت الحجز'),
+            'serial_number' => Yii::t('app', 'الرقم التسلسلي'),
+            'status' => Yii::t('app', 'الحالة'),
         ];
     }
 

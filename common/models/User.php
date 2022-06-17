@@ -28,7 +28,13 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const ROLE_USER = 10;
-
+    const statusArray = [
+        self::STATUS_DELETED=>"غير فعال",
+        self::STATUS_ACTIVE=>"فعال",
+    ];
+    public  function getStatusText(){
+        return self::statusArray[$this->status];
+    }
     /**
      * @inheritdoc
      */
