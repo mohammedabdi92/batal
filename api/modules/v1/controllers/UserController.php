@@ -68,7 +68,10 @@ class UserController extends Controller
                 'username' => (string)$model->user->username,
                 'email' => (string)$model->email,
                 'phone_number' => (string)$model->user->phone_number,
-                'amount' => (string)$model->user->amount,
+                'balance' => (string)$model->user->amount,
+                'admin_name' => 'batal',
+                'admin_email' => 'batal@xnxx.com',
+                'admin_phone_number' => '009627854565',
                 'token' => (string)$token,
             ];
         }
