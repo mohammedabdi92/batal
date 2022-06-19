@@ -21,6 +21,7 @@ class CustomFunc
     }
     public static function getFullDate($date){
 
+        print_r($date);die();
         return $date? date('Y-m-d H:i:s', $date):'';
 
     }

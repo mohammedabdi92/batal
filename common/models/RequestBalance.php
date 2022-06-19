@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\CustomFunc;
 use Yii;
 
 /**
@@ -15,6 +16,17 @@ use Yii;
  */
 class RequestBalance extends \yii\db\ActiveRecord
 {
+    const STATUS_PENDING = 1;
+    const STATUS_APPROVED = 2;
+    const STATUS_REJECTED = 3;
+    const statusArray = [
+        self::STATUS_PENDING=>"بانتظار الرد",
+        self::STATUS_APPROVED=>"تم اضافتها",
+        self::STATUS_REJECTED=>"تم رفضها",
+    ];
+    public  function getStatusText(){
+        return self::statusArray[$this->status];
+    }
     /**
      * {@inheritdoc}
      */
@@ -31,6 +43,22 @@ class RequestBalance extends \yii\db\ActiveRecord
         return [
             [['user_id', 'status'], 'integer'],
             [['amount'], 'number'],
+        ];
+    }
+    public function fields()
+    {
+        return [
+            'id',
+            'balance' => function ($model) {
+                return $model->amount;
+            },
+            'status' => function ($model) {
+                return $model->getStatusText();
+            },
+            'time' => function ($model) {
+                return $model->create_at;
+            },
+
         ];
     }
 

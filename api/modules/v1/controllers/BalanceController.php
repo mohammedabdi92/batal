@@ -46,6 +46,15 @@ class BalanceController extends Controller
         return ['error'=>'يجب تعبئة المبلغ '];
     }
 
+    public function actionList(){
+        $user =  \Yii::$app->user->identity;
+        if($user )
+        {
+            return ['data'=>RequestBalance::find()->where(['user_id'=>$user->id])->all()];
+        }
+        return null;
+    }
+
 
 
 }
