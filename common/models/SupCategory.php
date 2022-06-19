@@ -41,7 +41,7 @@ class SupCategory extends \yii\db\ActiveRecord
         return [
             'id','title',
             'image_url' => function ($model) {
-                return $this->image_name;
+                return $this->getImageUrl();
             },
             'children'=>function($model){
                 return  self::find()->where(['sup_cat_id'=>$this->id])->all() ;

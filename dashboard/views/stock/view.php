@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a(Yii::t('app', 'Index'), ['index'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -30,11 +31,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'card_id',
+            [
+                'attribute' => 'card_id',
+                'value' => function($model){
+                    return $model->getCardTitle();
+                },
+                'format' => 'raw',
+            ],
             'user_id',
             'reservation_date',
             'serial_number',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function($model){
+                    return $model->getStatusText();
+                },
+                'format' => 'raw',
+            ],
         ],
     ]) ?>
 

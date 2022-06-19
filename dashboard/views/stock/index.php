@@ -29,14 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'card_id',
+            [
+                'attribute' => 'card_id',
+                'value' => function($model){
+                    return $model->getCardTitle();
+                },
+                'format' => 'raw',
+            ],
             'user_id',
             'reservation_date',
-            'serial_number',
-            //'status',
+            [
+                'attribute' => 'status',
+                'value' => function($model){
+                    return $model->getStatusText();
+                },
+                'format' => 'raw',
+            ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Stock $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \common\models\Stock $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

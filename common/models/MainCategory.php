@@ -30,7 +30,7 @@ class MainCategory extends BaseModel
         return [
             'id','title',
             'image_url' => function ($model) {
-                return $this->image_name;
+                return $this->getImageUrl();
             },
         ];
     }

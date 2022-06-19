@@ -45,7 +45,7 @@ class Card extends BaseModel
                 return 5;
             },
             'image_url' => function ($model) {
-                return $this->image_name;
+                return $this->getImageUrl();
             },
         ];
     }
