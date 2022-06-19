@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\CustomFunc;
 use Yii;
 
 /**
@@ -57,20 +58,15 @@ class Stock extends \yii\db\ActiveRecord
     public function fields()
     {
         return [
-            'card_id'=> function ($model) {
+            'card_name'=> function ($model) {
                 return $this->getCardTitle();
             },
             'category'=> function ($model) {
                 return $this->getCategory();
             },
-            'title',
-            'price',
-            'count' => function ($model) {
-                return 5;
-            },
-            'image_url' => function ($model) {
-                return $this->getImageUrl();
-            },
+            'code',
+            'serial_number',
+            'reservation_date',
         ];
     }
 
@@ -117,5 +113,8 @@ class Stock extends \yii\db\ActiveRecord
 
     public  function getCardTitle(){
         return $this->card?$this->card->title:'';
+    }
+    public  function getCategory(){
+        return $this->card?$this->card->category:'';
     }
 }

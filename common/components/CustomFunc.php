@@ -19,4 +19,9 @@ class CustomFunc
             return \yii\helpers\ArrayHelper::map($models, $from, $to);
 
     }
+    public static function getFullDate($date){
+
+        return $date? date('Y-m-d H:i:s', $date):'';
+
+    }
 }

@@ -26,12 +26,31 @@ class StockController extends Controller
     public function actionCharge(){
         $count = \Yii::$app->request->post('count');
         $card_id = \Yii::$app->request->post('card_id');
-        if($count && $card_id )
+        $user =  \Yii::$app->user->identity;
+        if($count && $card_id &&  $card = Card::find()->where(['id'=>$card_id,'status'=>1])->one())
         {
-            $Stocks =  Stock::find()->where(['user_id'=>null,'card_id'=>$card_id])->limit($count)->all();
-            if($Stocks && count($Stocks) == $count )
+
+            $Stocks =  Stock::find()->where(['user_id'=>null,'card_id'=>$card_id,'status'=>1])->limit($count)->all();
+            $Stocks_count = $Stocks?count($Stocks):0;
+            if($Stocks && $Stocks_count== $count )
             {
-                return ['data'=>$Stocks];
+                $amount  = $Stocks_count * $card->price;
+                if($amount <= $user->amount)
+                {
+                    $user::updateAllCounters(['amount'=>-$amount],['id'=>$user->id]);
+                    foreach ($Stocks as $Stock)
+                    {
+                        $Stock->user_id = $user->id;
+                        $Stock->status = 2;
+                        $Stock->reservation_date = date('Y-m-d H:i:s');
+                        $Stock->save(false);
+
+                    }
+                    return ['data'=>$Stocks];
+                }else{
+                    return  ['error'=>'رصيدك لا يكفي'];
+                }
+
 
             }else{
                 return  ['error'=>'البطاقة التي طلبتها غير متوفرة'];
@@ -40,11 +59,8 @@ class StockController extends Controller
         return ['رجع ال count,card_id يا محترم'];
     }
     public function actionList(){
-
-
-
-        //400
-        return ['رجع ال id يا محترم'];
+        $user =  \Yii::$app->user;
+        return ['data'=>Stock::find()->where(['user_id'=>$user->id])->all()];
     }
 
 
