@@ -97,4 +97,12 @@ class UserController extends Controller
         }
         return [ 'errors' => (object)$model->getErrors()];
     }
+    public function actionReSendOtp(){
+        Yii::$app->mailer->compose()
+            ->setTo($email)
+            ->setFrom([$this->email => $this->name])
+            ->setSubject($this->subject)
+            ->setTextBody($this->body)
+            ->send();
+    }
 }

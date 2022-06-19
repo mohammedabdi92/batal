@@ -12,19 +12,16 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-//    public function behaviors()
-//    {
-//        $behaviors = parent::behaviors();
-//        $behaviors['authenticator'] = [
-//            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
-//        ];
-//
-//        return $behaviors;
-//    }
-    public function actionIndex()
+    public function behaviors()
     {
-       return "asdsadsa";
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
+        ];
+
+        return $behaviors;
     }
+
 
     public function actionMainList(){
 
