@@ -149,7 +149,7 @@ class RegisterRequest extends ActiveRecord
         $this->save(false);
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
-            ->setFrom(["info@syarah.com"])
+            ->setFrom(["info@mohammedabadi.com"])
             ->setSubject('تاكيد طلب التسجيل')
             ->setTextBody($this->reg_code)
             ->send();
