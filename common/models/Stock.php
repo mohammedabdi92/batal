@@ -58,6 +58,7 @@ class Stock extends \yii\db\ActiveRecord
     public function fields()
     {
         return [
+            'id',
             'card_name'=> function ($model) {
                 return $this->getCardTitle();
             },
