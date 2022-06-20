@@ -28,6 +28,15 @@ class RegisterRequest extends ActiveRecord
     const STATUS_PENDING = 3;
     const STATUS_ACTIVE = 5;
     const STATUS_APPROVE = 10;
+    const statusArray = [
+        self::STATUS_DELETED=>"تم رفضه",
+        self::STATUS_PENDING=>"غير مفعل",
+        self::STATUS_ACTIVE=>"بالانتظار",
+        self::STATUS_APPROVE=>"تم قبوله",
+    ];
+    public  function getStatusText(){
+        return self::statusArray[$this->status];
+    }
 
     /**
      * @inheritdoc
@@ -35,6 +44,19 @@ class RegisterRequest extends ActiveRecord
     public static function tableName()
     {
         return '{{%register_request}}';
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'الرقم'),
+            'status' => Yii::t('app', 'الحالة'),
+            'username' => Yii::t('app', 'اسم المستخدم'),
+            'phone_number' => Yii::t('app', 'رقم التلفون'),
+            'reg_code' => Yii::t('app', 'كود التحقق'),
+        ];
     }
 
     /**

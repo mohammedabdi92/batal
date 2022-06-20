@@ -118,7 +118,7 @@ class UserController extends Controller
     public function actionChangePassword(){
         $password = \Yii::$app->request->post('password');
         $new_password   = \Yii::$app->request->post('new_password');
-        
+
     }
 
 
@@ -157,7 +157,7 @@ class UserController extends Controller
 
         if($request_id && $reg_code)
         {
-            if($request = RegisterRequest::find()->where(['id'=>$request_id ,'status'=>'email'])->one())
+            if($request = RegisterRequest::find()->where(['id'=>$request_id ,'status'=>RegisterRequest::STATUS_PENDING])->one())
             {
                 if($request->reg_code == $reg_code)
                 {
