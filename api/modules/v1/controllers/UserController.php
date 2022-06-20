@@ -127,9 +127,10 @@ class UserController extends Controller
         $params = \Yii::$app->getRequest()->getBodyParams();
         if(!empty($params['email']))
         {
-            $model=  RegisterRequest::find()->where(['email'=>$params['email'],])->one();
+            $model=  RegisterRequest::find()->where(['email'=>$params['email'],'status'=>RegisterRequest::STATUS_PENDING])->one();
+        }else{
+            $model = new RegisterRequest();
         }
-        $model = new RegisterRequest();
         if ($model->load($params, '') && $model->save()) {
             return [
                 'request_id' =>$model->id,
