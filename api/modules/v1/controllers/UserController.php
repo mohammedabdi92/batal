@@ -3,6 +3,9 @@
 namespace api\modules\v1\controllers;
 
 use common\models\RegisterRequest;
+use common\models\User;
+use phpDocumentor\Reflection\TypeResolver;
+use phpDocumentor\Reflection\Types\True_;
 use Yii;
 use common\models\LoginForm;
 use sizeg\jwt\JwtHttpBearerAuth;
@@ -22,6 +25,8 @@ class UserController extends Controller
                 'login',
                 'register',
                 're-send-otp',
+                'check-otp',
+                'forget-check-otp',
             ],
         ];
 
@@ -52,19 +57,7 @@ class UserController extends Controller
     {
         $model = new LoginForm();
         if ($model->load(\Yii::$app->getRequest()->getBodyParams(), '') &&  $model->login()) {
-            $jwt = \Yii::$app->jwt;
-            $signer = $jwt->getSigner('HS256');
-            $key = $jwt->getKey();
-            $time = time();
-            $token = $jwt->getBuilder()
-                ->issuedBy('http://batalapi.mohammedabadi.com')// Configures the issuer (iss claim)
-                ->permittedFor('http://batalapi.mohammedabadi.com')// Configures the audience (aud claim)
-                ->identifiedBy('4f1g23a12aa', true)// Configures the id (jti claim), replicating as a header item
-                ->issuedAt($time)// Configures the time that the token was issue (iat claim)
-                ->expiresAt($time + 86400)// Configures the expiration time of the token (exp claim)
-                ->withClaim('uid', $model->user->id)// Configures a new claim, called "uid"
-                ->getToken($signer, $key); // Retrieves the generated token
-
+            $token = LoginForm::getJwtToken($model->user->id);
             return [
                 'username' => (string)$model->user->username,
                 'email' => (string)$model->email,
@@ -79,6 +72,54 @@ class UserController extends Controller
         return [ 'errors' => (object)$model->getErrors()];
 
     }
+    public function actionForgetPassword()
+    {
+        $email = \Yii::$app->request->post('email');
+        if($email & $user = User::find()->where(['email'=>$email,'status'=>User::STATUS_ACTIVE])->one())
+        {
+            $user->reSendOtp();
+           return true;
+
+        }else{
+            return ['error'=>"الايميل غير صحيح"];
+        }
+
+    }
+    public function actionForgetCheckOtp(){
+        $email = \Yii::$app->request->post('email');
+        $reg_code = \Yii::$app->request->post('otp');
+        $user = User::find()->where(['email'=>$email,'status'=>User::STATUS_ACTIVE])->one();
+        if($user && $reg_code)
+        {
+            if($user->reg_code == $reg_code)
+            {
+                $token = LoginForm::getJwtToken($user->id);
+                return [
+                    'username' => (string)$user->username,
+                    'email' => (string)$user->email,
+                    'phone_number' => (string)$user->phone_number,
+                    'balance' => (string)$user->amount,
+                    'admin_name' => 'batal',
+                    'admin_email' => 'batal@xnxx.com',
+                    'admin_phone_number' => '009627854565',
+                    'token' => (string)$token,
+                ];
+            }else{
+                return ['error'=>'الكود غير موجود'];
+            }
+
+
+        }else{
+            return ['error'=>'رقم الطلب غير صحيح'];
+        }
+
+    }
+
+    public function actionChangePassword(){
+        $password = \Yii::$app->request->post('password');
+        $new_password   = \Yii::$app->request->post('new_password');
+        
+    }
 
 
     public function actionRegister()
@@ -91,9 +132,9 @@ class UserController extends Controller
         $model = new RegisterRequest();
         if ($model->load($params, '') && $model->save()) {
             return [
+                'request_id' =>$model->id,
                 'username' => (string)$model->username,
                 'email' => (string)$model->email,
-                'code' => (string)$model->reg_code,
             ];
         }
         return [ 'errors' => (object)$model->getErrors()];
@@ -103,7 +144,7 @@ class UserController extends Controller
         if($request_id && $request = RegisterRequest::find()->where(['id'=>$request_id])->one())
         {
             $request->reSendOtp();
-            return ['code'=>$request->reg_code];
+            return true;
         }else{
             return ['error'=>'رقم الطلب غير صحيح'];
         }
@@ -118,7 +159,7 @@ class UserController extends Controller
         {
             if($request = RegisterRequest::find()->where(['id'=>$request_id ,'status'=>'email'])->one())
             {
-                if($request->reg_code != $reg_code)
+                if($request->reg_code == $reg_code)
                 {
                     $request->status = RegisterRequest::STATUS_ACTIVE;
                     $request->save(false);
@@ -130,8 +171,6 @@ class UserController extends Controller
             }else{
                 return ['error'=>'الطلب غير موجود'];
             }
-
-
         }else{
             return ['error'=>'رقم الطلب غير صحيح'];
         }

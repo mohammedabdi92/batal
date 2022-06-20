@@ -55,6 +55,7 @@ class RegisterRequest extends ActiveRecord
         return [
             [['username','email'], 'required'],
             [['email' ], 'unique'],
+            [['email' ], 'email'],
             [['email' ], 'validEmail'],
             [['phone_number'],'safe'],
             [['password'], 'required','on'=>"create"],

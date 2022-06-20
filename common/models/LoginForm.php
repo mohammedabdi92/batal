@@ -73,4 +73,18 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+    public  static function getJwtToken($id){
+        $jwt = \Yii::$app->jwt;
+        $signer = $jwt->getSigner('HS256');
+        $key = $jwt->getKey();
+        $time = time();
+        return $jwt->getBuilder()
+            ->issuedBy('http://batalapi.mohammedabadi.com')// Configures the issuer (iss claim)
+            ->permittedFor('http://batalapi.mohammedabadi.com')// Configures the audience (aud claim)
+            ->identifiedBy('4f1g23a12aa', true)// Configures the id (jti claim), replicating as a header item
+            ->issuedAt($time)// Configures the time that the token was issue (iat claim)
+            ->expiresAt($time + 86400)// Configures the expiration time of the token (exp claim)
+            ->withClaim('uid',$id)// Configures a new claim, called "uid"
+            ->getToken($signer, $key); // Retrieves the generated token
+    }
 }
