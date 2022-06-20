@@ -136,7 +136,7 @@ class UserController extends Controller
 
         if ($model->load($params, '') && $model->save()) {
 
-            print_r( $model->reSendOtp());die;
+            $model->reSendOtp();
             return [
                 'request_id' =>$model->id,
                 'username' => (string)$model->username,
