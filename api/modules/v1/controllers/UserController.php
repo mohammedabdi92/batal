@@ -109,4 +109,32 @@ class UserController extends Controller
         }
 
     }
+
+    public function actionCheckOtp(){
+        $request_id = \Yii::$app->request->post('request_id');
+        $reg_code = \Yii::$app->request->post('otp');
+
+        if($request_id && $reg_code)
+        {
+            if($request = RegisterRequest::find()->where(['id'=>$request_id ,'status'=>'email'])->one())
+            {
+                if($request->reg_code != $reg_code)
+                {
+                    $request->status = RegisterRequest::STATUS_ACTIVE;
+                    $request->save(false);
+                    return ['message'=>"تم تسجيل طلبك بنجاح سيتم التواصل معك قريبا"];
+                }else{
+                    return ['error'=>'الكود غير موجود'];
+                }
+
+            }else{
+                return ['error'=>'الطلب غير موجود'];
+            }
+
+
+        }else{
+            return ['error'=>'رقم الطلب غير صحيح'];
+        }
+
+    }
 }
