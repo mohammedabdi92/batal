@@ -142,5 +142,17 @@ class RegisterRequest extends ActiveRecord
     {
        return $this->reg_code = CustomFunc::getRandomString(4, true);//'9512';
     }
+    public function reSendOtp()
+    {
+//        print_r($this->email);die;
+        $this->generateCode();
+        $this->save(false);
+        return Yii::$app->mailer->compose()
+            ->setTo($this->email)
+            ->setFrom(["info@syarah.com"])
+            ->setSubject('تاكيد طلب التسجيل')
+            ->setTextBody($this->reg_code)
+            ->send();
+    }
 
 }

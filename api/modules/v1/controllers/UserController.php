@@ -21,6 +21,7 @@ class UserController extends Controller
             'optional' => [
                 'login',
                 'register',
+                're-send-otp',
             ],
         ];
 
@@ -98,11 +99,14 @@ class UserController extends Controller
         return [ 'errors' => (object)$model->getErrors()];
     }
     public function actionReSendOtp(){
-        Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setFrom([$this->email => $this->name])
-            ->setSubject($this->subject)
-            ->setTextBody($this->body)
-            ->send();
+        $request_id = \Yii::$app->request->post('request_id');
+        if($request_id && $request = RegisterRequest::find()->where(['id'=>$request_id])->one())
+        {
+            $request->reSendOtp();
+            return ['code'=>$request->reg_code];
+        }else{
+            return ['error'=>'رقم الطلب غير صحيح'];
+        }
+
     }
 }
