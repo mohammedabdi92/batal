@@ -40,10 +40,10 @@ class StockController extends Controller
                     $user::updateAllCounters(['amount'=>-$amount],['id'=>$user->id]);
                     foreach ($Stocks as $Stock)
                     {
-//                        $Stock->user_id = $user->id;
-//                        $Stock->status = 2;
-//                        $Stock->reservation_date = date('Y-m-d H:i:s');
-//                        $Stock->save(false);
+                        $Stock->user_id = $user->id;
+                        $Stock->status = 2;
+                        $Stock->reservation_date = date('Y-m-d H:i:s');
+                        $Stock->save(false);
 
                     }
                     return ['data'=>$Stocks];
@@ -60,7 +60,7 @@ class StockController extends Controller
     }
     public function actionList(){
         $user =  \Yii::$app->user;
-        return ['data'=>Stock::find()->where(['user_id'=>$user->id])->all()];
+        return ['data'=>Stock::find()->where(['user_id'=>$user->id])->orderby('id desc')->all()];
     }
 
 

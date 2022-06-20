@@ -50,7 +50,7 @@ class BalanceController extends Controller
         $user =  \Yii::$app->user->identity;
         if($user )
         {
-            return ['data'=>RequestBalance::find()->where(['user_id'=>$user->id])->all()];
+            return ['data'=>RequestBalance::find()->where(['user_id'=>$user->id])->orderby('id desc')->all()];
         }
         return null;
     }
