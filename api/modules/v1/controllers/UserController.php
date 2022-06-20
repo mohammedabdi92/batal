@@ -128,9 +128,12 @@ class UserController extends Controller
         if(!empty($params['email']))
         {
             $model=  RegisterRequest::find()->where(['email'=>$params['email'],'status'=>RegisterRequest::STATUS_PENDING])->one();
-        }else{
+        }
+        if(!$model)
+        {
             $model = new RegisterRequest();
         }
+
         if ($model->load($params, '') && $model->save()) {
             return [
                 'request_id' =>$model->id,
