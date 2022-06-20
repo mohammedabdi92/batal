@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\RegisterRequest */
@@ -15,16 +16,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+
+    <div class="register-request-form">
+
+        <?php $form = ActiveForm::begin(); ?>
+
+        <div class="form-group">
+
+            <?= Html::submitButton(Yii::t('app', 'موافقة'), ['name'=>'submit', 'value'=>'approve','class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('app', 'رفض'),[
+                'name'=>'submit',
+                'value'=>'reject',
+                'class' => 'btn btn-danger',
+
+            ]) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -32,13 +42,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'phone_number',
-            'password_hash',
-            'email:email',
-            'status',
-            'created_at',
-            'updated_at',
-            'reg_code',
+            'email',
+            [
+                'attribute' => 'status',
+                'value' => function($model){
+                    return $model->getStatusText();
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'created_at',
+                'value' => function($model){
+                    return \common\components\CustomFunc::getFullDate($model->created_at);
+                },
+                'format' => 'raw',
+            ],
+
         ],
     ]) ?>
+
 
 </div>

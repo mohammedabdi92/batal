@@ -68,6 +68,7 @@ $user = Yii::$app->user->identity;
                                         ["label" => 'الائحة الفرعية', "url" => "/sup-category/index", "icon" => "list"],
                                         ["label" => 'انواع البطاقات', "url" => "/card/index", "icon" => "list"],
                                         ["label" => 'البطاقات', "url" => "/stock/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'طلبات التسجيل', "url" => "/register-request/index", "icon" => "credit-card-alt"],
 //                                        [
 //                                            "label" => "المخزن",
 //                                            "icon" => "th",

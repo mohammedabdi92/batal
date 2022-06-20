@@ -4,6 +4,7 @@ namespace dashboard\controllers;
 
 use common\models\RegisterRequest;
 use common\models\RegisterRequestSearch;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,6 +57,34 @@ class RegisterRequestController extends Controller
      */
     public function actionView($id)
     {
+
+        if ($this->request->isPost) {
+            $req =  RegisterRequest::find()->where(['id' => $id,'status'=>RegisterRequest::STATUS_ACTIVE])->one();
+            $submit = \Yii::$app->request->post('submit');
+
+            if($req)
+            {
+                if($submit == "reject")
+                {
+                    $req->status = RegisterRequest::STATUS_DELETED;
+                    $req->save(false);
+                    $this->redirect(['index']);
+                }
+                if($submit == "approve")
+                {
+                    $req->status = RegisterRequest::STATUS_APPROVE;
+                    $user = new User();
+                    $user->load($req->attributes,'');
+                    $user->status = User::STATUS_ACTIVE;
+                    $user->save(false);
+                    $req->save(false);
+                    $this->redirect(['user/index']);
+
+                }
+            }
+
+
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
