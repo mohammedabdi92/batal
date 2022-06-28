@@ -64,7 +64,7 @@ class UserController extends Controller
                 'phone_number' => (string)$model->user->phone_number,
                 'balance' => (string)$model->user->amount,
                 'admin_name' => 'batal',
-                'admin_email' => 'batal@xnxx.com',
+                'admin_email' => 'batal@gmail.com',
                 'admin_phone_number' => '009627854565',
                 'token' => (string)$token,
             ];
@@ -85,6 +85,7 @@ class UserController extends Controller
         }
 
     }
+
     public function actionForgetCheckOtp(){
         $email = \Yii::$app->request->post('email');
         $reg_code = \Yii::$app->request->post('otp');
@@ -100,7 +101,7 @@ class UserController extends Controller
                     'phone_number' => (string)$user->phone_number,
                     'balance' => (string)$user->amount,
                     'admin_name' => 'batal',
-                    'admin_email' => 'batal@xnxx.com',
+                    'admin_email' => 'batal@gmail.com',
                     'admin_phone_number' => '009627854565',
                     'token' => (string)$token,
                 ];
@@ -115,9 +116,18 @@ class UserController extends Controller
 
     }
 
-    public function actionChangePassword(){
-        $password = \Yii::$app->request->post('password');
-        $new_password   = \Yii::$app->request->post('new_password');
+    public function actionForgetChangePassword(){
+
+        $password   = \Yii::$app->request->post('new_password');
+        $user =  \Yii::$app->user->identity;
+        if(!empty($password) )
+        {
+            $user->setPassword($password);
+            $user->save(false);
+        }else{
+            return ['error'=>'يجب ادخال كلمة السر الجديدة'];
+        }
+
 
     }
 
