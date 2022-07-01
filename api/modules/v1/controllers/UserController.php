@@ -176,7 +176,7 @@ class UserController extends Controller
         $reg_code = \Yii::$app->request->post('otp');
 
         if ($request_id && $reg_code) {
-            $request = RegisterRequest::find()->where(['id' => $request_id, 'status' => RegisterRequest::STATUS_PENDING])->one()
+            $request = RegisterRequest::find()->where(['id' => $request_id, 'status' => RegisterRequest::STATUS_PENDING])->one();
             if ($request) {
                 if ($request->reg_code == $reg_code) {
                     $request->status = RegisterRequest::STATUS_ACTIVE;
