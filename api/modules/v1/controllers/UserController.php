@@ -124,6 +124,7 @@ class UserController extends Controller
         if (!empty($password)) {
             $user->setPassword($password);
             $user->save(false);
+            return ['message' => 'تم تغيير كلمة السر بنجاح'];
         } else {
             return ['error' => 'يجب ادخال كلمة السر الجديدة'];
         }
