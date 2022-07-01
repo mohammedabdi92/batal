@@ -24,6 +24,7 @@ class UserController extends Controller
             'optional' => [
                 'login',
                 'register',
+                'forget-password',
                 're-send-otp',
                 'check-otp',
                 'forget-check-otp',
@@ -75,14 +76,17 @@ class UserController extends Controller
     public function actionForgetPassword()
     {
         $email = \Yii::$app->request->post('email');
-        if($email & $user = User::find()->where(['email'=>$email,'status'=>User::STATUS_ACTIVE])->one())
+        if($email )
         {
-            $user->reSendOtp();
-           return true;
-
-        }else{
-            return ['error'=>"الايميل غير صحيح"];
+            $user = User::find()->where(['email'=>$email,'status'=>User::STATUS_ACTIVE])->one();
+            if($user)
+            {
+                $user->reSendOtp();
+                return true;
+            }
         }
+            return ['error'=>"الايميل غير صحيح"];
+
 
     }
 
