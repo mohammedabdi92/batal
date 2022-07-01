@@ -132,6 +132,29 @@ class UserController extends Controller
 
     }
 
+    public function actionChangePassword()
+    {
+
+        $new_password = \Yii::$app->request->post('new_password');
+        $password = \Yii::$app->request->post('password');
+        $user = \Yii::$app->user->identity;
+
+        if (!empty($new_password) ) {
+            if( $user->validatePassword($password))
+            {
+                $user->setPassword($new_password);
+                $user->save(false);
+                return ['message' => 'تم تغيير كلمة السر بنجاح'];
+            }else{
+                return ['error' => 'كلمة السر غير صحيحة'];
+            }
+        } else {
+            return ['error' => 'يجب ادخال كلمة السر الجديدة'];
+        }
+
+
+    }
+
 
     public function actionRegister()
     {
