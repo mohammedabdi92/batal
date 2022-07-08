@@ -71,8 +71,9 @@ class MainCategoryController extends Controller
         $model = new MainCategory();
 
         if ($this->request->isPost) {
+            $model->load($this->request->post());
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->save()) {
                 $model->upload();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -95,11 +96,17 @@ class MainCategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->upload();
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($this->request->isPost)
+        {
+            $model->load($this->request->post());
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ( $model->save()) {
+                $model->upload();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+
 
         return $this->render('update', [
             'model' => $model,
