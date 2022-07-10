@@ -48,8 +48,9 @@ class MainCategory extends BaseModel
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png, jpg, jpeg'],
             [['status'], 'integer'],
+            [['title'], 'required'],
             [['title', 'image_name'], 'string', 'max' => 255],
         ];
     }

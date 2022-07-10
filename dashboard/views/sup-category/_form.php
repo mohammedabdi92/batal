@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SupCategory */
@@ -20,7 +21,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList($model::statusArray) ?>
 
-    <?= $form->field($model, 'imageFile')->fileInput() ?>
+
+
+    <?php
+    echo $form->field($model, 'imageFile')->widget(\kartik\file\FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'initialPreview'=>$model->getImageUrl()??false,
+            'initialPreviewAsData' => true,
+            'showCaption' => true ,
+            'showRemove' => false ,
+            'showUpload' => false ,
+        ]
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

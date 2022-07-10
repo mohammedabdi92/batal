@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use rmrevin\yii\fontawesome\FA;
 
 $bundle = mortezakarimi\gentelellartl\assets\Asset::register($this);
+\dashboard\assets\AppAsset::register($this);
 $user = Yii::$app->user->identity;
 
 ?>

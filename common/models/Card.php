@@ -55,7 +55,7 @@ class Card extends BaseModel
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png, jpg, jpeg'],
             [['sup_cat_id', 'status'], 'integer'],
             [['price', 'category'], 'number'],
             [['title', 'image_name'], 'string', 'max' => 255],

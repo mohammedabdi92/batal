@@ -71,8 +71,9 @@ class SupCategoryController extends Controller
         $model = new SupCategory();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->load($this->request->post());
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->save()) {
                 $model->upload();
                 return $this->redirect(['view', 'id' => $model->id]);
             }

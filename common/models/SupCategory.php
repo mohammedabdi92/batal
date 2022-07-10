@@ -55,9 +55,10 @@ class SupCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png, jpg, jpeg'],
             [['main_cat_id', 'status'], 'integer'],
             [['sup_cat_id'], 'singleParent'],
+            [['title'], 'required'],
             [['title', 'image_name'], 'string', 'max' => 255],
         ];
     }
