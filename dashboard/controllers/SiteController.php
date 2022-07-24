@@ -2,6 +2,8 @@
 
 namespace dashboard\controllers;
 
+use common\models\Admin;
+use common\models\AdminLoginForm;
 use common\models\LoginForm;
 use common\models\User;
 use Yii;
@@ -80,7 +82,7 @@ class SiteController extends Controller
 
         $this->layout = false;
 
-        $model = new LoginForm();
+        $model = new AdminLoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
