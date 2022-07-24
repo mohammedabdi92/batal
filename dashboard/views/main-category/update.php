@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\MainCategory */
 
-$this->title = Yii::t('app', 'Update Main Category: {name}', [
+$this->title = Yii::t('app', 'تعديل القائمة الرئيسية  : {name}', [
     'name' => $model->title,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Main Categories'), 'url' => ['index']];
