@@ -1,32 +1,106 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap4\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
+/**
+ * @var LoginForm $model
+ * @var string $content
+ * @var \yii\web\View $this
+ */
 
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use yii\helpers\Html;
+use rmrevin\yii\fontawesome\FA;
+use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+\mortezakarimi\gentelellartl\assets\AnimateCssAsset::register($this);
+$bundle = mortezakarimi\gentelellartl\assets\Asset::register($this);
 ?>
-<div class="site-login">
-    <div class="mt-5 offset-lg-3 col-lg-6">
-        <h1><?= Html::encode($this->title) ?></h1>
+<?php $this->beginPage(); ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="<?= Yii::$app->charset ?>"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
 
-        <p>Please fill out the following fields to login:</p>
+</head>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+<!-- /header content -->
+<body class="login">
+<?php $this->beginBody(); ?>
+<div>
+<style>
+    input{
+        direction: ltr;
+    }
+</style>
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <?php $form = ActiveForm::begin([
+                    'id' => 'login-form',
+                    'fieldConfig' => [
+                        'errorOptions' => [
+                            'encode' => false,
+                        ]
+                    ]
+                ]); ?>
+                <h1>البطل</h1>
+                <div class="row">
+                    <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email'), 'autocomplete' => 'off'])->label(false) ?>
+                </div>
+                <div class="row">
+                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password'), 'autocomplete' => 'off'])->label(false) ?>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-1 col-lg-11">
+                        <?= Html::submitButton('تسجيل دخول', ['class' => 'btn btn-default submit', 'name' => 'login-button']) ?>
+                    </div>
+                </div>
 
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                <div class="clearfix"></div>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <?php ActiveForm::end(); ?>
+            </section>
+        </div>
 
-            <div class="form-group">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
-            </div>
+        <div id="rest_pass" class="animate form rest_pass_form">
+            <section class="login_content">
+                <!-- /password recovery -->
+                <form action="index.html">
+                    <h1>بازیابی رمز عبور</h1>
+                    <div class="form-group has-feedback">
+                        <input type="email" class="form-control" name="email" placeholder="ایمیل"/>
+                        <div class="form-control-feedback">
+                            <i class="fa fa-envelope-o text-muted"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-block">بازیابی رمز عبور</button>
+                    <div class="clearfix"></div>
 
-        <?php ActiveForm::end(); ?>
+                    <div class="separator">
+                        <p class="change_link">جدید در سایت؟
+                            <a href="#signup" class="to_register"> ایجاد حساب </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br/>
+
+                        <div>
+                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <p>©1397 تمامی حقوق محفوظ. Gentelella Alela! یک قالب بوت استرپ 3. حریم خصوصی و شرایط</p>
+                        </div>
+                    </div>
+                </form>
+                <!-- Password recovery -->
+            </section>
+        </div>
     </div>
 </div>
+<?php $this->endBody(); ?>
+</body>
+</html>
+<?php $this->endPage(); ?>
