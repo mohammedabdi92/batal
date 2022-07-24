@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string|null $title
  * @property int|null $status
+ * @property int|null $type
+ * @property int|null $fields_type
  * @property string|null $image_name
  */
 class MainCategory extends BaseModel
@@ -23,6 +25,30 @@ class MainCategory extends BaseModel
     public  function getStatusText(){
         return self::statusArray[$this->status];
     }
+    const TYPE_CARD = 1;
+    const TYPE_REQUEST = 2;
+    const typeArray = [
+        self::TYPE_CARD=>"بطاقات",
+        self::TYPE_REQUEST=>"دفع مباشر",
+    ];
+    public  function getTypeText(){
+        return self::typeArray[$this->type];
+    }
+
+    const FIELDS_TYPE_USER_PASSWORD = 1;
+    const FIELDS_TYPE_EMIAL_PASSWORD = 2;
+    const FIELDS_TYPE_PHONE = 3;
+    const FIELDS_TYPE_ID = 4;
+    const fieldsTypeArray = [
+        self::FIELDS_TYPE_USER_PASSWORD=>"اسم المستخدم وكلمة المرور",
+        self::FIELDS_TYPE_EMIAL_PASSWORD=>"اسم المستخدم والايميل",
+        self::FIELDS_TYPE_PHONE=>"رقم التلفون",
+        self::FIELDS_TYPE_ID=>"الID",
+    ];
+    public  function fieldsTypeText(){
+        return self::fieldsTypeArray[$this->fields_type];
+    }
+
     public $imageFile;
 
     public function fields()
@@ -50,6 +76,7 @@ class MainCategory extends BaseModel
         return [
             [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png, jpg, jpeg'],
             [['status'], 'integer'],
+            [['fields_type','type'],'safe'],
             [['title'], 'required'],
             [['title', 'image_name'], 'string', 'max' => 255],
         ];
@@ -66,6 +93,8 @@ class MainCategory extends BaseModel
             'status' => Yii::t('app', 'الحالة'),
             'image_name' => Yii::t('app', 'الصورة '),
             'imageFile' => Yii::t('app', 'الصورة '),
+            'fields_type' => Yii::t('app', 'نوع ادخال الطلب '),
+            'type' => Yii::t('app', 'النوع '),
         ];
     }
 

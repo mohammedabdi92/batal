@@ -68,10 +68,11 @@ class RequestBalance extends \common\models\BaseModel
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'status' => Yii::t('app', 'Status'),
-            'amount' => Yii::t('app', 'Amount'),
+            'id' => Yii::t('app', 'الرقم'),
+            'user_id' => Yii::t('app', 'المستخدم'),
+            'status' => Yii::t('app', 'الحالة'),
+            'amount' => Yii::t('app', 'القيمة'),
+            'create_at' => Yii::t('app', 'تاريخ الانشاء'),
         ];
     }
 

@@ -98,6 +98,7 @@ class CardController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost) {
+
             $model->load($this->request->post());
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->save()) {
@@ -105,7 +106,6 @@ class CardController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

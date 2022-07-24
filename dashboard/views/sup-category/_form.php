@@ -17,7 +17,7 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'main_cat_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\MainCategory::find()->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'sup_cat_id')->dropDownList([null=>'اختر الائحة الفرعية ...']+\yii\helpers\ArrayHelper::map(\common\models\SupCategory::find()->all(), 'id', 'title')) ?>
+    <?= $form->field($model, 'sup_cat_id')->dropDownList([null=>'اختر القائمة الفرعية ...']+\yii\helpers\ArrayHelper::map(\common\models\SupCategory::find()->all(), 'id', 'title')) ?>
 
     <?= $form->field($model, 'status')->dropDownList($model::statusArray) ?>
 

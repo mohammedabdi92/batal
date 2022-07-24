@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Card */
 
-$this->title = Yii::t('app', 'Update Card: {name}', [
+$this->title = Yii::t('app', 'تعديل اسم البطاقة : {name}', [
     'name' => $model->title,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cards'), 'url' => ['index']];

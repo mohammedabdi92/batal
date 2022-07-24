@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\MainCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Main Categories');
+$this->title = Yii::t('app', 'القائمة الرئيسية');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-category-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Main Category'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'انشاء قائمة رئيسية'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

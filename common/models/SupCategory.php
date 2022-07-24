@@ -65,11 +65,11 @@ class SupCategory extends \common\models\BaseModel
     public function singleParent(){
         if(!empty($this->parent) && ($this->parent->id == $this->id)   )
         {
-            $this->addError('sup_cat_id','لا يمكنك ربط الائحة الفرعية بنفسها ');
+            $this->addError('sup_cat_id','لا يمكنك ربط القائمة الفرعية بنفسها ');
         }
         if(!empty($this->parent) && !empty($this->parent->parent))
         {
-            $this->addError('sup_cat_id','الائحة الفرعية مربوطة بلائحة اخرى');
+            $this->addError('sup_cat_id','القائمة الفرعية مربوطة بلائحة اخرى');
         }
 
     }
@@ -85,7 +85,7 @@ class SupCategory extends \common\models\BaseModel
             'main_cat_id' => Yii::t('app', 'الائحة'),
             'status' => Yii::t('app', 'الحالة'),
             'image_name' => Yii::t('app', 'الصورة '),
-            'sup_cat_id' => Yii::t('app', 'الائحة الفرعية  '),
+            'sup_cat_id' => Yii::t('app', 'القائمة الفرعية  '),
             'imageFile' => Yii::t('app', 'الصورة '),
         ];
     }

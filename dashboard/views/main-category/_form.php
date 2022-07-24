@@ -7,12 +7,20 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\MainCategory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<script>
+    // $(document).on('change', '#maincategory-type', function (item) {
+    //     debugger;
+    // });
+</script>
 <div class="main-category-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'type')->dropDownList(\common\models\MainCategory::typeArray) ?>
+
+    <?= $form->field($model, 'fields_type',['options'=>['style'=>($model->type == $model::TYPE_CARD)?'display:block':'display:block']])->dropDownList([''=>'اختار ...']+\common\models\MainCategory::fieldsTypeArray ) ?>
 
     <?= $form->field($model, 'status')->dropDownList($model::statusArray) ?>
 

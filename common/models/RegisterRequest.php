@@ -57,6 +57,7 @@ class RegisterRequest extends ActiveRecord
             'phone_number' => Yii::t('app', 'رقم التلفون'),
             'reg_code' => Yii::t('app', 'كود التحقق'),
             'email' => Yii::t('app', 'الايميل'),
+            'password' => Yii::t('app', 'باسورد'),
             'created_at' => Yii::t('app', 'وقت تقديم الطلب'),
         ];
     }

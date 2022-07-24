@@ -16,7 +16,7 @@ class BaseModel extends \yii\db\ActiveRecord
     public function getUserName($att)
     {
         $user =  User::findOne($this->$att);
-        return $user->full_name??'';
+        return $user->username??'';
     }
     public function getAdminname($att)
     {

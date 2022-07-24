@@ -64,13 +64,16 @@ $user = Yii::$app->user->identity;
                                 [
                                     "items" => [
                                         ["label" => 'الرئيسية', "url" => "/", "icon" => "home"],
-                                        ["label" => 'مستخدمين الموقع', "url" => "/admin/index", "icon" => "user"],
-                                        ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
-                                        ["label" => 'الائحة ', "url" => "/main-category/index", "icon" => "list"],
-                                        ["label" => 'الائحة الفرعية', "url" => "/sup-category/index", "icon" => "list"],
-                                        ["label" => 'انواع البطاقات', "url" => "/card/index", "icon" => "list"],
-                                        ["label" => 'البطاقات', "url" => "/stock/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'مستخدم رئيسي', "url" => "/admin/index", "icon" => "user"],
                                         ["label" => 'طلبات التسجيل', "url" => "/register-request/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
+                                        ["label" => 'القائمة الرئيسة ', "url" => "/main-category/index", "icon" => "list"],
+                                        ["label" => 'القائمة الفرعية', "url" => "/sup-category/index", "icon" => "list"],
+                                        ["label" => 'اسماء البطاقات', "url" => "/card/index", "icon" => "list"],
+                                        ["label" => 'البطاقات', "url" => "/stock/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'الفئات', "url" => "/groups/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'طلبات الشحن', "url" => "/request-balance/index", "icon" => "credit-card-alt"],
+
 //                                        [
 //                                            "label" => "المخزن",
 //                                            "icon" => "th",

@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-dashboard',
+    'language' => 'ar',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'dashboard\controllers',
     'bootstrap' => ['log'],

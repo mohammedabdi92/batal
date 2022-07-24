@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Stock */
 
-$this->title = Yii::t('app', 'Create Stock');
+$this->title = Yii::t('app', 'اضافة بطاقة');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stocks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -100,6 +100,7 @@ class RegisterRequestController extends Controller
         $model = new RegisterRequest();
 
         if ($this->request->isPost) {
+            $model->status = RegisterRequest::STATUS_ACTIVE;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
