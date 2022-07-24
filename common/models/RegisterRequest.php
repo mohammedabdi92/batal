@@ -181,8 +181,8 @@ class RegisterRequest extends ActiveRecord
             ->setTo($this->email)
             ->setFrom("info@mohammedabadi.com")
             ->setSubject('تاكيد طلب التسجيل')
-            ->setTextBody($this->reg_code.'الكود الخاص بك هو :-')
-            ->setHtmlBody($this->reg_code.'الكود الخاص بك هو :-')
+            ->setTextBody('الكود الخاص بك هو :-'.$this->reg_code)
+            ->setHtmlBody('الكود الخاص بك هو :- '.$this->reg_code)
             ->send();
     }
 }
