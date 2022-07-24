@@ -64,7 +64,8 @@ $user = Yii::$app->user->identity;
                                 [
                                     "items" => [
                                         ["label" => 'الرئيسية', "url" => "/", "icon" => "home"],
-                                        ["label" => 'المستخدمين', "url" => "/user/index", "icon" => "user"],
+                                        ["label" => 'مستخدمين الموقع', "url" => "/admin/index", "icon" => "user"],
+                                        ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
                                         ["label" => 'الائحة ', "url" => "/main-category/index", "icon" => "list"],
                                         ["label" => 'الائحة الفرعية', "url" => "/sup-category/index", "icon" => "list"],
                                         ["label" => 'انواع البطاقات', "url" => "/card/index", "icon" => "list"],

@@ -14,7 +14,7 @@ use Yii;
  * @property int|null $create_at
  * @property float|null $amount
  */
-class RequestBalance extends \yii\db\ActiveRecord
+class RequestBalance extends \common\models\BaseModel
 {
     const STATUS_PENDING = 1;
     const STATUS_APPROVED = 2;

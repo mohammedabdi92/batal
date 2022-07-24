@@ -179,9 +179,10 @@ class RegisterRequest extends ActiveRecord
     public function sendOtp(){
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
-            ->setFrom(["info@mohammedabadi.com"])
+            ->setFrom("info@mohammedabadi.com")
             ->setSubject('تاكيد طلب التسجيل')
-            ->setTextBody($this->reg_code)
+            ->setTextBody($this->reg_code.'الكود الخاص بك هو :-')
+            ->setHtmlBody($this->reg_code.'الكود الخاص بك هو :-')
             ->send();
     }
 }

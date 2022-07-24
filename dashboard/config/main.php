@@ -22,7 +22,7 @@ return [
             'csrfParam' => '_csrf-dashboard',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-dashboard', 'httpOnly' => true],
         ],

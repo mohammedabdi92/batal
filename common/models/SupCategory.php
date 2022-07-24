@@ -14,7 +14,7 @@ use Yii;
  * @property int|null $status
  * @property string|null $image_name
  */
-class SupCategory extends \yii\db\ActiveRecord
+class SupCategory extends \common\models\BaseModel
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;

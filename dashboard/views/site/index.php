@@ -1,7 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
-$this->title = 'وجدي لمواد البناء';
+$this->title = 'البطل';
 ?>
 <div class="" role="main">
 

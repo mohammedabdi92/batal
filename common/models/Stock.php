@@ -16,7 +16,7 @@ use Yii;
  * @property string|null $code
  * @property int|null $status
  */
-class Stock extends \yii\db\ActiveRecord
+class Stock extends \common\models\BaseModel
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
