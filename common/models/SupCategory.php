@@ -81,7 +81,7 @@ class SupCategory extends \common\models\BaseModel
     {
         return [
             'id' => Yii::t('app', 'الرقم'),
-            'title' => Yii::t('app', 'العنوان'),
+            'title' => Yii::t('app', 'الاسم'),
             'main_cat_id' => Yii::t('app', 'الائحة'),
             'status' => Yii::t('app', 'الحالة'),
             'image_name' => Yii::t('app', 'الصورة '),

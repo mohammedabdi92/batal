@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\SupCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sup Categories');
+$this->title = Yii::t('app', 'القائمة الفرعية');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sup-category-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Sup Category'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'انشاء قائمة فرعية'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

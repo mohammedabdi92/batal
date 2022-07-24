@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\MainCategory */
 
-$this->title = Yii::t('app', 'Create Main Category');
+$this->title = Yii::t('app', 'انشاء قائمة رئيسية');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Main Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
