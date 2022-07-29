@@ -9,7 +9,7 @@ $this->title = 'البطل';
         <div class="page-title">
             <div class="title_left">
                 <h3>
-                    الصفحة الرئيسية
+                    تقرير البطاقات
 <!--                    Plain Page <small>Page subtile </small>-->
                 </h3>
             </div>

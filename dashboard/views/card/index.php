@@ -20,11 +20,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'اضافة اسم بطاقة'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
 //        'filterModel' => $searchModel,
+        'rowOptions' =>function ($model){
+            if(!empty($model->minimum_count) && $model->minimum_count > $model->count ){
+                return [
+                    'class' => 'danger  time-set',
+                    'data-text' => ' '
+                ];
+            }
+            return ['class' => 'time-set-notSet'];
+
+
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

@@ -28,6 +28,7 @@ class SiteController extends Controller
         $data = ['card'=>[],'request'=>[]];
         $user =  \Yii::$app->user->identity;
         $Categorys =  GroupsCategory::find()->select('id')->where(['groups_id'=>$user->group_id])->column();
+        print_r($Categorys);die;
         if($Categorys)
         {
             $data['card'] = MainCategory::find()->where(['status'=>1,'id'=>$Categorys,'type'=>MainCategory::TYPE_CARD])->all();

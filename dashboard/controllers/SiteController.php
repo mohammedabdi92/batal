@@ -65,8 +65,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $counts['active_users'] = User::find()->where(['status'=>User::STATUS_ACTIVE])->count();
 
-        return $this->render('index');
+        return $this->render('index',
+        ['counts'=>$counts]
+        );
     }
 
     /**

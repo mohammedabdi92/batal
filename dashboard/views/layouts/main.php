@@ -63,7 +63,15 @@ $user = Yii::$app->user->identity;
                             mortezakarimi\gentelellartl\widgets\Menu::widget(
                                 [
                                     "items" => [
-                                        ["label" => 'الرئيسية', "url" => "/", "icon" => "home"],
+                                        [
+                                            "label" => "التقارير",
+                                            "icon" => "th",
+                                            "items" => [
+                                                ["label" => "تقرير البطاقات", "url" => ["reports/cards"]],
+//                                                ["label" => "پنل", "url" => ["site/panel"]],
+                                            ],
+                                        ],
+
                                         ["label" => 'مستخدم رئيسي', "url" => "/admin/index", "icon" => "user"],
                                         ["label" => 'طلبات التسجيل', "url" => "/register-request/index", "icon" => "credit-card-alt"],
                                         ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
@@ -75,14 +83,6 @@ $user = Yii::$app->user->identity;
                                         ["label" => 'طلبات الشحن', "url" => "/request-balance/index", "icon" => "credit-card-alt"],
                                         ["label" => 'طلبات الشحن المباشر', "url" => "/charge-request/index", "icon" => "credit-card-alt"],
 
-//                                        [
-//                                            "label" => "المخزن",
-//                                            "icon" => "th",
-//                                            "items" => [
-//                                                ["label" => "العناصر", "url" => ["site/menu"]],
-////                                                ["label" => "پنل", "url" => ["site/panel"]],
-//                                            ],
-//                                        ],
 
                                     ],
                                 ]
