@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = ActiveForm::begin(); ?>
 
         <div class="form-group">
-
+            <?= $form->field($model, 'group_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Groups::find()->all(),'id','name')); ?>
             <?= Html::submitButton(Yii::t('app', 'موافقة'), ['name'=>'submit', 'value'=>'approve','class' => 'btn btn-success']) ?>
             <?= Html::submitButton(Yii::t('app', 'رفض'),[
                 'name'=>'submit',

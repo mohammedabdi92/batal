@@ -2,17 +2,16 @@
 
 namespace dashboard\controllers;
 
-use common\models\RegisterRequest;
-use common\models\RegisterRequestSearch;
-use common\models\User;
+use common\models\ChargeRequest;
+use common\models\ChargeRequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RegisterRequestController implements the CRUD actions for RegisterRequest model.
+ * ChargeRequestController implements the CRUD actions for ChargeRequest model.
  */
-class RegisterRequestController extends Controller
+class ChargeRequestController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,14 +32,14 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Lists all RegisterRequest models.
+     * Lists all ChargeRequest models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new RegisterRequestSearch();
-        $searchModel->status = RegisterRequest::STATUS_ACTIVE;
+        $searchModel = new ChargeRequestSearch();
+        $searchModel->status = ChargeRequest::STATUS_PENDING;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,16 +49,15 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Displays a single RegisterRequest model.
-     * @param int $id
+     * Displays a single ChargeRequest model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         if ($this->request->isPost) {
-            $req =  RegisterRequest::find()->where(['id' => $id,'status'=>RegisterRequest::STATUS_ACTIVE])->one();
+            $req =  ChargeRequest::find()->where(['id' => $id,'status'=>ChargeRequest::STATUS_PENDING])->one();
             $submit = \Yii::$app->request->post('submit');
             $RegisterRequest =\Yii::$app->request->post('RegisterRequest');
 
@@ -67,20 +65,21 @@ class RegisterRequestController extends Controller
             {
                 if($submit == "reject")
                 {
-                    $req->status = RegisterRequest::STATUS_DELETED;
+                    $user = $req->user;
+                    if($user)
+                    {
+                        $user::updateAllCounters(['amount' => $req->amount], ['id' => $user->id]);
+                    }
+                    $req->status = ChargeRequest::STATUS_REJECTED;
+
                     $req->save(false);
                     $this->redirect(['index']);
                 }
                 if($submit == "approve")
                 {
-                    $req->status = RegisterRequest::STATUS_APPROVE;
-                    $user = new User();
-                    $user->load($req->attributes,'');
-                    $user->group_id = $RegisterRequest['group_id'];
-                    $user->status = User::STATUS_ACTIVE;
-                    $user->save(false);
+                    $req->status = ChargeRequest::STATUS_APPROVED;
                     $req->save(false);
-                    $this->redirect(['user/index']);
+                    $this->redirect(['index']);
 
                 }
             }
@@ -93,16 +92,15 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Creates a new RegisterRequest model.
+     * Creates a new ChargeRequest model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new RegisterRequest();
+        $model = new ChargeRequest();
 
         if ($this->request->isPost) {
-            $model->status = RegisterRequest::STATUS_ACTIVE;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -116,9 +114,9 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Updates an existing RegisterRequest model.
+     * Updates an existing ChargeRequest model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -136,9 +134,9 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Deletes an existing RegisterRequest model.
+     * Deletes an existing ChargeRequest model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -150,15 +148,15 @@ class RegisterRequestController extends Controller
     }
 
     /**
-     * Finds the RegisterRequest model based on its primary key value.
+     * Finds the ChargeRequest model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return RegisterRequest the loaded model
+     * @param int $id ID
+     * @return ChargeRequest the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = RegisterRequest::findOne(['id' => $id])) !== null) {
+        if (($model = ChargeRequest::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

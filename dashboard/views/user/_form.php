@@ -20,6 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput() ?>
     <?= $form->field($model, 'status')->dropDownList($model::statusArray); ?>
+    <?= $form->field($model, 'group_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Groups::find()->all(),'id','name')); ?>
     * اذا قمت بتعبئة هذا الحقل سيتغير كلمت السر للمستخدم
     <?= $form->field($model, 'password_text')->textInput() ?>
     <div class="form-group">

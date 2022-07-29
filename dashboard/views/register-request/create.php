@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\RegisterRequest */
 
-$this->title = Yii::t('app', 'Create Register Request');
+$this->title = Yii::t('app', 'انشاء طلب تسجيل');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Register Requests'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

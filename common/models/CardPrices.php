@@ -44,13 +44,13 @@ class CardPrices extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'card_id' => Yii::t('app', 'Card ID'),
+            'card_id' => Yii::t('app', 'اسم البطاقة'),
             'groups_id' => Yii::t('app', 'Groups ID'),
             'price' => Yii::t('app', 'Price'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'created_by' => Yii::t('app', 'Created By'),
+            'created_at' => Yii::t('app', 'تاريخ الانشاء'),
+            'created_by' => Yii::t('app', 'المونشيء'),
+            'updated_at' => Yii::t('app', 'تاريخ التعديل'),
+            'updated_by' => Yii::t('app', 'اخر معدل'),
         ];
     }
 

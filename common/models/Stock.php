@@ -11,6 +11,7 @@ use Yii;
  * @property int $id
  * @property int|null $card_id
  * @property float|null $user_id
+ * @property double|null $amount
  * @property string|null $reservation_date
  * @property string|null $serial_number
  * @property string|null $code
@@ -50,7 +51,7 @@ class Stock extends \common\models\BaseModel
             [['card_id', 'status'], 'integer'],
             [['user_id'], 'number'],
             [['code'],'required'],
-            [['reservation_date'], 'safe'],
+            [['reservation_date','amount'], 'safe'],
             [['serial_number'], 'string', 'max' => 255],
         ];
     }

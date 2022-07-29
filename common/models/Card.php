@@ -46,7 +46,11 @@ class Card extends BaseModel
     public function fields()
     {
         return [
-            'id', 'title', 'price',
+            'id', 'title','price' => function ($model) {
+                $user =  \Yii::$app->user->identity;
+                $priceModel = CardPrices::find()->where(['card_id' => $this->id, 'groups_id' => $user->group_id])->one();
+                return $priceModel->price ?? '';
+            },
             'count' => function ($model) {
                 return 5;
             },

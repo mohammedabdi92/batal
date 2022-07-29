@@ -18,6 +18,7 @@ use yii\web\IdentityInterface;
  * @property string $reg_code
  * @property string $email
  * @property integer $status
+ * @property integer $group_id
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -57,6 +58,7 @@ class RegisterRequest extends ActiveRecord
             'phone_number' => Yii::t('app', 'رقم التلفون'),
             'reg_code' => Yii::t('app', 'كود التحقق'),
             'email' => Yii::t('app', 'الايميل'),
+            'group_id' => Yii::t('app', 'الفئة'),
             'password' => Yii::t('app', 'باسورد'),
             'created_at' => Yii::t('app', 'وقت تقديم الطلب'),
         ];
@@ -82,7 +84,7 @@ class RegisterRequest extends ActiveRecord
             [['email' ], 'unique'],
             [['email' ], 'email'],
             [['email' ], 'validEmail'],
-            [['phone_number'],'safe'],
+            [['phone_number','group_id'],'safe'],
             [['password'], 'required','on'=>"create"],
             ['status', 'default', 'value' => self::STATUS_PENDING],
         ];

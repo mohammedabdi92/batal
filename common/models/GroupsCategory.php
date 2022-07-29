@@ -44,10 +44,10 @@ class GroupsCategory extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'groups_id' => Yii::t('app', 'Groups ID'),
             'main_category_id' => Yii::t('app', 'القائمة الرئيسية'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'created_by' => Yii::t('app', 'Created By'),
+            'created_at' => Yii::t('app', 'تاريخ الانشاء'),
+            'created_by' => Yii::t('app', 'المونشيء'),
+            'updated_at' => Yii::t('app', 'تاريخ التعديل'),
+            'updated_by' => Yii::t('app', 'اخر معدل'),
         ];
     }
 

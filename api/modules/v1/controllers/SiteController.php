@@ -3,6 +3,7 @@
 namespace api\modules\v1\controllers;
 
 use common\models\Card;
+use common\models\GroupsCategory;
 use common\models\MainCategory;
 use common\models\SupCategory;
 use yii\rest\Controller;
@@ -24,8 +25,15 @@ class SiteController extends Controller
 
 
     public function actionMainList(){
-
-       return ['data'=> MainCategory::find()->where(['status'=>1])->all()];
+        $data = ['card'=>[],'request'=>[]];
+        $user =  \Yii::$app->user->identity;
+        $Categorys =  GroupsCategory::find()->select('id')->where(['groups_id'=>$user->group_id])->column();
+        if($Categorys)
+        {
+            $data['card'] = MainCategory::find()->where(['status'=>1,'id'=>$Categorys,'type'=>MainCategory::TYPE_CARD])->all();
+            $data['request'] = MainCategory::find()->where(['status'=>1,'id'=>$Categorys,'type'=>MainCategory::TYPE_REQUEST])->all();
+        }
+       return ['data'=> $data];
     }
     public function actionSupList(){
 

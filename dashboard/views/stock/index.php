@@ -24,32 +24,55 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             [
                 'attribute' => 'card_id',
-                'value' => function($model){
+                'value' => function ($model) {
                     return $model->getCardTitle();
                 },
                 'format' => 'raw',
             ],
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'value' => function($model){
+                    return $model->getUserName('user_id');
+                },
+                'format' => 'raw',
+            ],
             'reservation_date',
             [
                 'attribute' => 'status',
-                'value' => function($model){
+                'value' => function ($model) {
                     return $model->getStatusText();
                 },
+                'filter' => \common\models\Stock::statusArray,
                 'format' => 'raw',
             ],
             [
                 'class' => ActionColumn::className(),
+                'buttons' => [
+                    'delete' => function ($url, $model) {
+
+                        if (!$model->reservation_date) {
+                            return Html::a('<span class="fa fa-trash"></span>', $url);
+                        }
+
+                    },
+                    'update' => function ($url, $model) {
+                        if (!$model->reservation_date) {
+                            return Html::a('<span class="fa fa-pencil"></span>', $url);
+                        }
+
+                    },
+
+                ],
                 'urlCreator' => function ($action, \common\models\Stock $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

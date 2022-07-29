@@ -73,6 +73,7 @@ $user = Yii::$app->user->identity;
                                         ["label" => 'البطاقات', "url" => "/stock/index", "icon" => "credit-card-alt"],
                                         ["label" => 'الفئات', "url" => "/groups/index", "icon" => "credit-card-alt"],
                                         ["label" => 'طلبات الشحن', "url" => "/request-balance/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'طلبات الشحن المباشر', "url" => "/charge-request/index", "icon" => "credit-card-alt"],
 
 //                                        [
 //                                            "label" => "المخزن",

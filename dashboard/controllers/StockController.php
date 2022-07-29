@@ -24,7 +24,7 @@ class StockController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+
                     ],
                 ],
             ]
@@ -111,7 +111,15 @@ class StockController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $stock =  $this->findModel($id);
+        $card =  $stock->card;
+        if($card)
+        {
+            $card->updateCounters(['count'=>-1]);
+            $stock->delete();
+
+        }
+
 
         return $this->redirect(['index']);
     }

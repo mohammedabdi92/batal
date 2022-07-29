@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property integer $role
  * @property integer $status
+ * @property integer $group_id
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $amount
@@ -67,7 +68,7 @@ class User extends BaseModel implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             ['reg_code','number'],
-            [['password_hash','username','phone_number','email','password_text'],'safe'],
+            [['password_hash','username','phone_number','email','password_text','group_id'],'safe'],
             ['role', 'default', 'value' => self::ROLE_USER],
             ['role', 'in', 'range' => [self::ROLE_USER]],
         ];
@@ -97,6 +98,7 @@ class User extends BaseModel implements IdentityInterface
             'updated_at' => Yii::t('app', 'تاريخ التعديل'),
             'updated_by' => Yii::t('app', 'اخر معدل'),
             'email' => Yii::t('app', 'الايميل'),
+            'group_id' => Yii::t('app', 'الفئة'),
             'store_id' => Yii::t('app', 'المحل'),
             'type' => Yii::t('app', 'صلاحيات'),
             'password_text' => Yii::t('app', 'كلمة السر'),
