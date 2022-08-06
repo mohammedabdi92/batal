@@ -54,7 +54,7 @@ class MainCategory extends BaseModel
     public function fields()
     {
         return [
-            'id','title',
+            'id','title','fields_type',
             'image_url' => function ($model) {
                 return $this->getImageUrl();
             },

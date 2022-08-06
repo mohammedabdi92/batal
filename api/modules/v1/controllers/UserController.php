@@ -218,4 +218,20 @@ class UserController extends Controller
         }
 
     }
+
+    public function actionCheckPassword()
+    {
+
+        $password = \Yii::$app->request->post('password');
+        $user = \Yii::$app->user->identity;
+
+            if( $user->validatePassword($password))
+            {
+                return ['message' => 'كلمة السر صحيحة'];
+            }else{
+                return ['error' => 'كلمة السر غير صحيحة'];
+            }
+
+
+    }
 }

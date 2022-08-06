@@ -23,7 +23,6 @@ class SiteController extends Controller
         return $behaviors;
     }
 
-
     public function actionMainList(){
         $data = ['card'=>[],'request'=>[]];
         $user =  \Yii::$app->user->identity;
@@ -35,6 +34,7 @@ class SiteController extends Controller
         }
        return ['data'=> $data];
     }
+
     public function actionSupList(){
 
         $params = \Yii::$app->request->post();
@@ -45,6 +45,7 @@ class SiteController extends Controller
         //400
         return ['رجع ال id يا محترم'];
     }
+
     public function actionCardList(){
 
         $params = \Yii::$app->request->post();
