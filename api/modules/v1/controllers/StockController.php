@@ -85,7 +85,7 @@ class StockController extends Controller
                             $request->save();
                             $user::updateAllCounters(['amount' => -$amount], ['id' => $user->id]);
                         }
-                        return ['تم ارسال الطلب بنجاح'];
+                        return ['message'=> 'تم ارسال الطلب بنجاح'];
                     } else {
                         return ['error' => 'رصيدك لا يكفي'];
                     }
@@ -99,7 +99,7 @@ class StockController extends Controller
                 return ['error' => 'رقم البطاقة غير صحيح'];
             }
         }
-        return ['يجب ارسال card_id ,fields_type '];
+        return ['error'=>'يجب ارسال card_id ,fields_type '];
     }
 
     public function actionList()
