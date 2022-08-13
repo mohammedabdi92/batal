@@ -19,7 +19,7 @@ use Yii;
  */
 class Stock extends \common\models\BaseModel
 {
-    const STATUS_DELETED = 0;
+    const STATUS_DELETED = 3;
     const STATUS_ACTIVE = 1;
     const STATUS_PAYED = 2;
     const statusArray = [
@@ -97,6 +97,7 @@ class Stock extends \common\models\BaseModel
             'reservation_date' => Yii::t('app', 'وقت الحجز'),
             'serial_number' => Yii::t('app', 'الرقم التسلسلي'),
             'code' => Yii::t('app', 'رمز البطاقة'),
+            'amount' => Yii::t('app', 'سعر البيع'),
             'status' => Yii::t('app', 'الحالة'),
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace dashboard\controllers;
 
+use common\models\StockSearch;
 use common\models\User;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -49,11 +50,14 @@ class ReportsController extends Controller
      */
     public function actionCards()
     {
-        $counts['active_users'] = User::find()->where(['status'=>User::STATUS_ACTIVE])->count();
 
-        return $this->render('cards',
-            ['counts'=>$counts]
-        );
+        $searchModel = new StockSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams,true);
+
+        return $this->render('stock', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
 
