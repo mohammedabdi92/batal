@@ -23,8 +23,7 @@ use kartik\daterange\DateRangePicker;
 
     <?= $form->field($model, 'card_id')->dropDownList(['اختر ...'] + \yii\helpers\ArrayHelper::map(\common\models\Card::find()->all(), 'id', 'title')) ?>
 
-    <b>التاريخ</b>
-    <?= $form->field($model, 'reservation_date_range')->label('Created Date')->widget(\kartik\date\DatePicker::classname(), [
+    <?= $form->field($model, 'reservation_date_form')->label('تاريخ الحجز')->widget(\kartik\date\DatePicker::classname(), [
         'model' => $model,
         'attribute' => 'reservation_date_from',
         'attribute2' => 'reservation_date_to',
@@ -40,8 +39,8 @@ use kartik\daterange\DateRangePicker;
 
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'بحث'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'تفريغ الحقول'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

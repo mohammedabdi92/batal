@@ -86,15 +86,14 @@ class StockSearch extends Stock
 
             $query->andFilterWhere(['card_id' => $this->card_id]);
         }
-        if(!empty($this->reservation_date_range))
+
+        if(!empty($this->reservation_date_form))
         {
-
-            $date = explode(" - ", $this->reservation_date_range);
-            if(!empty($date[1]))
-                $query->andFilterWhere(['<=', 'reservation_date', $date[1]]);
-
-            if(!empty($date[0]))
-                $query->andFilterWhere(['>=', 'reservation_date', $date[0]]);
+            $query->andFilterWhere(['>=', 'reservation_date', $this->reservation_date_form]);
+        }
+        if(!empty($this->reservation_date_to))
+        {
+            $query->andFilterWhere(['<=', 'reservation_date', $this->reservation_date_to]);
         }
 
         $query->andFilterWhere(['like', 'serial_number', $this->serial_number]);

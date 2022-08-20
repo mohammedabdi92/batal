@@ -11,6 +11,8 @@ use common\models\ChargeRequest;
  */
 class ChargeRequestSearch extends ChargeRequest
 {
+    public $created_at_from;
+    public $created_at_to;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class ChargeRequestSearch extends ChargeRequest
     {
         return [
             [['id', 'user_id', 'status', 'fields_type', 'created_at', 'updated_at', 'updated_by', 'created_by'], 'integer'],
-            [['field_name', 'field_email', 'field_password', 'field_id', 'field_phone_number','amount'], 'safe'],
+            [['field_name', 'field_email', 'field_password', 'field_id', 'field_phone_number','amount','created_at_from','created_at_to'], 'safe'],
         ];
     }
 
@@ -73,7 +75,15 @@ class ChargeRequestSearch extends ChargeRequest
             ->andFilterWhere(['like', 'field_password', $this->field_password])
             ->andFilterWhere(['like', 'field_id', $this->field_id])
             ->andFilterWhere(['like', 'field_phone_number', $this->field_phone_number]);
+        if(!empty($this->created_at_from))
+        {
 
+            $query->andFilterWhere(['>=', 'created_at', strtotime( $this->created_at_from)]);
+        }
+        if(!empty($this->created_at_to))
+        {
+            $query->andFilterWhere(['<=', 'created_at', strtotime( $this->created_at_to)]);
+        }
         return $dataProvider;
     }
 }

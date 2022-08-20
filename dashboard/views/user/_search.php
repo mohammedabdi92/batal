@@ -44,8 +44,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'phone_number') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'بحث'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'تفريغ الحقول'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
