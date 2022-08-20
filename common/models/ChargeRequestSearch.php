@@ -18,7 +18,7 @@ class ChargeRequestSearch extends ChargeRequest
     {
         return [
             [['id', 'user_id', 'status', 'fields_type', 'created_at', 'updated_at', 'updated_by', 'created_by'], 'integer'],
-            [['field_name', 'field_email', 'field_password', 'field_id', 'field_phone_number'], 'safe'],
+            [['field_name', 'field_email', 'field_password', 'field_id', 'field_phone_number','amount'], 'safe'],
         ];
     }
 

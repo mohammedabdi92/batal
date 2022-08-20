@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "charge_request".
@@ -58,6 +59,15 @@ class ChargeRequest extends BaseModel
         return 'charge_request';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * {@inheritdoc}
      */

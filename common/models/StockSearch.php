@@ -16,6 +16,8 @@ class StockSearch extends Stock
     public $sum_amount;
     public $reservation_date_range;
     public $total_profit;
+    public $reservation_date_form;
+    public $reservation_date_to;
     /**
      * {@inheritdoc}
      */
@@ -25,7 +27,7 @@ class StockSearch extends Stock
             [['id', 'card_id', 'status'], 'integer'],
             [['user_id'], 'number'],
             [['reservation_date_range', 'serial_number','sum_count','sum_count','sum_price','sum_amount',
-                'total_profit'], 'safe'],
+                'total_profit','reservation_date_form','reservation_date_to'], 'safe'],
         ];
     }
 

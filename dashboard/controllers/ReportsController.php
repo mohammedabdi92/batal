@@ -2,6 +2,7 @@
 
 namespace dashboard\controllers;
 
+use common\models\ChargeRequestSearch;
 use common\models\StockSearch;
 use common\models\User;
 use yii\filters\VerbFilter;
@@ -55,6 +56,23 @@ class ReportsController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams,true);
 
         return $this->render('stock', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionChargeRequest()
+    {
+
+        $searchModel = new ChargeRequestSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams,true);
+
+        return $this->render('charge-request', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

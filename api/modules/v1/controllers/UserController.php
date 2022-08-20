@@ -234,4 +234,10 @@ class UserController extends Controller
 
 
     }
+    public function actionCheckAuth()
+    {
+        $user = \Yii::$app->user->identity;
+        return $user;
+
+    }
 }
