@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, CardEntryUser $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \common\models\CardEntryUser $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

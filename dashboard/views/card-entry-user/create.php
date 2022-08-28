@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\CardEntryUser */
 
-$this->title = Yii::t('app', 'Create Card Entry User');
+$this->title = Yii::t('app', 'انشاء مدخل البطاقات');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Card Entry Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
