@@ -4,6 +4,7 @@ namespace entry\controllers;
 
 use common\models\Stock;
 use common\models\StockSearch;
+use entry\components\BaseController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -11,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * StockController implements the CRUD actions for Stock model.
  */
-class StockController extends Controller
+class StockController extends BaseController
 {
     /**
      * @inheritDoc
