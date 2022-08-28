@@ -69,6 +69,7 @@ $user = Yii::$app->user->identity;
                                             "items" => [
                                                 ["label" => "تقرير البطاقات", "url" => ["reports/cards"]],
                                                 ["label" => "تقرير الشحن المباشر", "url" => ["reports/charge-request"]],
+                                                ["label" => "تقرير طلبات الشحن", "url" => ["reports/request-balance"]],
 //                                                ["label" => "پنل", "url" => ["site/panel"]],
                                             ],
                                         ],
@@ -76,6 +77,7 @@ $user = Yii::$app->user->identity;
                                         ["label" => 'مستخدم رئيسي', "url" => "/admin/index", "icon" => "user"],
                                         ["label" => 'طلبات التسجيل', "url" => "/register-request/index", "icon" => "credit-card-alt"],
                                         ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
+                                        ["label" => 'مدخلين البطاقات', "url" => "/card-entry-user/index", "icon" => "user"],
                                         ["label" => 'القائمة الرئيسة ', "url" => "/main-category/index", "icon" => "list"],
                                         ["label" => 'القائمة الفرعية', "url" => "/sup-category/index", "icon" => "list"],
                                         ["label" => 'اسماء البطاقات', "url" => "/card/index", "icon" => "list"],

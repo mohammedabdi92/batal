@@ -6,31 +6,26 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ChargeRequestSearch */
+/* @var $searchModel common\models\RequestBalanceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', ' تقرير طلبات الشحن المباشر');
+$this->title = Yii::t('app', 'طلبات الشحن');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="charge-request-index">
+<div class="request-balance-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p>
+        <?= Html::a(Yii::t('app', 'انشاء طلب شحن'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-    <?php  echo $this->render('_search_charge_req', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search_request_balance', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-
             'id',
-            [
-                'attribute' => 'card_id',
-                'value' => function ($model) {
-                    return $model->getCardTitle();
-                },
-                'format' => 'raw',
-            ],
             [
                 'attribute' => 'user_id',
                 'value' => function($model){
@@ -45,24 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw',
             ],
-            [
-                'attribute' => 'fields_type',
-                'value' => function($model){
-                    return $model->fieldsTypeText();
-                },
-                'format' => 'raw',
-            ],
             'amount',
-
+            'create_at',
             [
-                'attribute' => 'created_at',
-                'value' => function($model){
-                    return \common\components\CustomFunc::getFullDate($model->created_at);
-                },
-                'format' => 'raw',
+                'class' => ActionColumn::className(),
+                'template' => '{view}',
+                'urlCreator' => function ($action, \common\models\RequestBalance $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                 }
             ],
-
-
         ],
     ]); ?>
 

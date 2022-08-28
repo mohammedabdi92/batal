@@ -216,7 +216,6 @@ class UserController extends Controller
         } else {
             return ['error' => 'رقم الطلب غير صحيح'];
         }
-
     }
 
     public function actionCheckPassword()

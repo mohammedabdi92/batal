@@ -4,6 +4,8 @@ namespace common\models;
 
 use common\components\CustomFunc;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "stock".
@@ -16,6 +18,8 @@ use Yii;
  * @property string|null $serial_number
  * @property string|null $code
  * @property int|null $status
+ * @property int|null $created_at
+ * @property int|null $created_by
  */
 class Stock extends \common\models\BaseModel
 {
@@ -42,6 +46,22 @@ class Stock extends \common\models\BaseModel
         return 'stock';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute'=>false,
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -51,7 +71,7 @@ class Stock extends \common\models\BaseModel
             [['card_id', 'status'], 'integer'],
             [['user_id'], 'number'],
             [['code'],'required'],
-            [['reservation_date','amount'], 'safe'],
+            [['reservation_date','amount','created_at','created_by'], 'safe'],
             [['serial_number'], 'string', 'max' => 255],
         ];
     }

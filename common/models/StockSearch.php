@@ -16,6 +16,8 @@ class StockSearch extends Stock
     public $sum_amount;
     public $reservation_date_range;
     public $total_profit;
+    public $created_at_form;
+    public $created_at_to;
     public $reservation_date_form;
     public $reservation_date_to;
     /**
@@ -27,7 +29,7 @@ class StockSearch extends Stock
             [['id', 'card_id', 'status'], 'integer'],
             [['user_id'], 'number'],
             [['reservation_date_range', 'serial_number','sum_count','sum_count','sum_price','sum_amount',
-                'total_profit','reservation_date_form','reservation_date_to'], 'safe'],
+                'total_profit','reservation_date_form','reservation_date_to','created_at_form','reservation_date_to','created_by'], 'safe'],
         ];
     }
 
@@ -69,6 +71,7 @@ class StockSearch extends Stock
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'created_by' => $this->created_by,
         ]);
 
         if(!empty($this->status))
@@ -94,6 +97,15 @@ class StockSearch extends Stock
         if(!empty($this->reservation_date_to))
         {
             $query->andFilterWhere(['<=', 'reservation_date', $this->reservation_date_to]);
+        }
+        if(!empty($this->created_at_form))
+        {
+
+            $query->andFilterWhere(['>=', 'created_at', $this->created_at_form]);
+        }
+        if(!empty($this->created_at_to))
+        {
+            $query->andFilterWhere(['<=', 'created_at', strtotime($this->created_at_to)]);
         }
 
         $query->andFilterWhere(['like', 'serial_number', $this->serial_number]);

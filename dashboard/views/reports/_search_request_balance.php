@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ChargeRequestSearch */
+/* @var $model common\models\RequestBalanceSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="charge-request-search">
+<div class="request-balance-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['charge-request'],
+        'action' => ['request-balance'],
         'method' => 'get',
     ]); ?>
 
 
     <?= $form->field($model, 'user_id')->dropDownList([''=>'اختر .....']+\yii\helpers\ArrayHelper::map(\common\models\User::find()->all(), 'id', 'username')) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([''=>'اختر .....']+$model::statusArray) ?>
+    <?= $form->field($model, 'status')->dropDownList($model::statusArray); ?>
 
 
     <?= $form->field($model, 'created_at_from')->label('تاريخ ')->widget(\kartik\date\DatePicker::classname(), [
@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'بحث'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'تفريغ الحقول'), ['charge-request'], ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'تفريغ الحقول'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

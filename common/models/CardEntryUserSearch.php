@@ -4,25 +4,21 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\RequestBalance;
+use common\models\CardEntryUser;
 
 /**
- * RequestBalanceSearch represents the model behind the search form of `common\models\RequestBalance`.
+ * CardEntryUserSearch represents the model behind the search form of `common\models\CardEntryUser`.
  */
-class RequestBalanceSearch extends RequestBalance
+class CardEntryUserSearch extends CardEntryUser
 {
-    public $created_at_from;
-    public $created_at_to;
-    public $total_amount;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'user_id', 'status'], 'integer'],
-            [['amount'], 'number'],
-            [['create_at','created_at_from','created_at_to','total_amount'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'full_name', 'phone_number', 'email', 'auth_key', 'password_hash'], 'safe'],
         ];
     }
 
@@ -42,9 +38,9 @@ class RequestBalanceSearch extends RequestBalance
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$getSums=false)
+    public function search($params)
     {
-        $query = RequestBalance::find();
+        $query = CardEntryUser::find();
 
         // add conditions that should always apply here
 
@@ -59,24 +55,21 @@ class RequestBalanceSearch extends RequestBalance
             // $query->where('0=1');
             return $dataProvider;
         }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'status' => $this->status,
-            'amount' => $this->amount,
-            'create_at' => $this->create_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
-        if(!empty($this->created_at_from)) {
-            $query->andFilterWhere(['>=', 'create_at',  $this->created_at_from]);
-        }
-        if(!empty($this->created_at_to)) {
-            $query->andFilterWhere(['<=', 'create_at', $this->created_at_to]);
-        }
-        if($getSums) {
-            $this->total_amount = $query->sum('amount');
-        }
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'full_name', $this->full_name])
+            ->andFilterWhere(['like', 'phone_number', $this->phone_number])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash]);
 
         return $dataProvider;
     }

@@ -3,6 +3,8 @@
 namespace dashboard\controllers;
 
 use common\models\ChargeRequestSearch;
+use common\models\RequestBalance;
+use common\models\RequestBalanceSearch;
 use common\models\StockSearch;
 use common\models\User;
 use yii\filters\VerbFilter;
@@ -73,6 +75,24 @@ class ReportsController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams,true);
 
         return $this->render('charge-request', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+ /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionRequestBalance()
+    {
+
+        $searchModel = new RequestBalanceSearch();
+        $searchModel->status = RequestBalance::STATUS_PENDING;
+        $dataProvider = $searchModel->search($this->request->queryParams,true);
+
+        return $this->render('request-balance', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
