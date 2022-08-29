@@ -75,6 +75,7 @@ $user = Yii::$app->user->identity;
                                         ],
 
                                         ["label" => 'مستخدم رئيسي', "url" => "/admin/index", "icon" => "user"],
+
                                         ["label" => 'طلبات التسجيل', "url" => "/register-request/index", "icon" => "credit-card-alt"],
                                         ["label" => 'مستخدمين التطبيق', "url" => "/user/index", "icon" => "user"],
                                         ["label" => 'مدخلين البطاقات', "url" => "/card-entry-user/index", "icon" => "user"],
@@ -85,6 +86,7 @@ $user = Yii::$app->user->identity;
                                         ["label" => 'الفئات', "url" => "/groups/index", "icon" => "credit-card-alt"],
                                         ["label" => 'طلبات الشحن', "url" => "/request-balance/index", "icon" => "credit-card-alt"],
                                         ["label" => 'طلبات الشحن المباشر', "url" => "/charge-request/index", "icon" => "credit-card-alt"],
+                                        ["label" => 'الفواتير', "url" => "/invoices/index", "icon" => "info"],
 
 
                                     ],
